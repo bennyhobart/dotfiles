@@ -1,6 +1,6 @@
 set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/vundle/
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
@@ -11,7 +11,7 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'bling/vim-airline'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'scrooloose/nerdtree'
-Bundle 'Valloric/YouCompleteMe'
+"Bundle 'Valloric/YouCompleteMe'
 Bundle 'mattn/emmet-vim'
 Bundle 'digitaltoad/vim-jade'
 Bundle 'rizzatti/dash.vim'
