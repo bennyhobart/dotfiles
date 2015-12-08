@@ -11,7 +11,7 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'bling/vim-airline'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'scrooloose/nerdtree'
-"Bundle 'Valloric/YouCompleteMe'
+Bundle 'Valloric/YouCompleteMe'
 Bundle 'mattn/emmet-vim'
 Bundle 'digitaltoad/vim-jade'
 Bundle 'rizzatti/dash.vim'
@@ -22,6 +22,7 @@ Bundle 'chriskempson/base16-vim'
 Bundle 'mxw/vim-jsx'
 Bundle 'pangloss/vim-javascript'
 Bundle 'tpope/vim-unimpaired'
+Bundle 'kylef/apiblueprint.vim'
 
 "Set colorscheme
 colorscheme base16-default
