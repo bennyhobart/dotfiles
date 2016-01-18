@@ -23,6 +23,8 @@ Bundle 'mxw/vim-jsx'
 Bundle 'pangloss/vim-javascript'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'kylef/apiblueprint.vim'
+Bundle 'lambdatoast/elm.vim'
+Bundle 'tpope/vim-repeat'
 
 "Set colorscheme
 colorscheme base16-default
