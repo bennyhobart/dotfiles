@@ -14,7 +14,6 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'mattn/emmet-vim'
 Bundle 'digitaltoad/vim-jade'
-Bundle 'rizzatti/dash.vim'
 Bundle 'othree/html5.vim'
 Bundle 'hail2u/vim-css3-syntax'
 Bundle 'groenewege/vim-less'
@@ -22,9 +21,12 @@ Bundle 'chriskempson/base16-vim'
 Bundle 'mxw/vim-jsx'
 Bundle 'pangloss/vim-javascript'
 Bundle 'tpope/vim-unimpaired'
-Bundle 'kylef/apiblueprint.vim'
+" Bundle 'kylef/apiblueprint.vim'
 Bundle 'lambdatoast/elm.vim'
 Bundle 'tpope/vim-repeat'
+Bundle 'mustache/vim-mustache-handlebars'
+Bundle 'heavenshell/vim-jsdoc'
+Bundle 'ternjs/tern_for_vim'
 
 "Set colorscheme
 colorscheme base16-default
@@ -81,7 +83,7 @@ set completeopt=menuone,longest,preview
 "
 
 " CtrlP
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/node_modules/*,*/bower_components/* 
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/node_modules/*,*/bower_components/*,*/typings/*
 
 " Text wrap simpler, then type the open tag or ',"
 vmap <C-w> S
@@ -124,3 +126,8 @@ let g:tern_show_argument_hints="on_hold"
 
 "JS Highlighting
 let g:javascript_enable_domhtmlcss=1
+
+"JsDOC
+let g:jsdoc_allow_input_prompt = 1
+let g:jsdoc_input_description = 1
+let g:jsdoc_enable_es6 = 1
