@@ -4,29 +4,29 @@ set rtp+=~/.vim/vundle/
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
+Bundle 'pangloss/vim-javascript'
+Bundle 'mxw/vim-jsx'
 Bundle 'SirVer/ultisnips'
 Bundle 'scrooloose/syntastic'
-Bundle 'tpope/vim-surround'
 Bundle 'kien/ctrlp.vim'
-Bundle 'bling/vim-airline'
+Bundle 'vim-airline/vim-airline'
+Bundle 'vim-airline/vim-airline-themes'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'scrooloose/nerdtree'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'mattn/emmet-vim'
-Bundle 'digitaltoad/vim-jade'
 Bundle 'othree/html5.vim'
 Bundle 'hail2u/vim-css3-syntax'
 Bundle 'groenewege/vim-less'
 Bundle 'chriskempson/base16-vim'
-Bundle 'mxw/vim-jsx'
-Bundle 'pangloss/vim-javascript'
+Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
-" Bundle 'kylef/apiblueprint.vim'
-Bundle 'lambdatoast/elm.vim'
 Bundle 'tpope/vim-repeat'
-Bundle 'mustache/vim-mustache-handlebars'
+Bundle 'tpope/vim-commentary'
+Bundle 'tpope/vim-sleuth'
 Bundle 'heavenshell/vim-jsdoc'
 Bundle 'ternjs/tern_for_vim'
+Bundle 'statianzo/vim-jade'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'honza/vim-snippets'
 
 "Set colorscheme
 colorscheme base16-default
@@ -46,7 +46,6 @@ set complete-=i
 set showmatch
 set showmode
 set tabstop=4
-set shiftwidth=4
 set expandtab
 set nrformats-=octal
 set shiftround
@@ -119,13 +118,8 @@ let g:syntastic_check_on_wq = 0
 " Set javascript checker
 let g:syntastic_javascript_checkers = ['eslint']
 
-" Tern
-set omnifunc=syntaxcomplete#Complete
-let g:tern_map_keys=1
-let g:tern_show_argument_hints="on_hold"
-
 "JS Highlighting
-let g:javascript_enable_domhtmlcss=1
+let g:jsx_ext_required = 0
 
 "JsDOC
 let g:jsdoc_allow_input_prompt = 1
