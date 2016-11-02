@@ -27,10 +27,15 @@ Bundle 'ternjs/tern_for_vim'
 Bundle 'statianzo/vim-jade'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'honza/vim-snippets'
+Bundle 'mustache/vim-mustache-handlebars'
+Bundle 'tpope/vim-fugitive'
+Bundle 'raimondi/delimitmate'
+Bundle 'terryma/vim-multiple-cursors'
+Bundle 'mtscout6/syntastic-local-eslint.vim'
 
 "Set colorscheme
-colorscheme base16-default
 set background=dark
+colorscheme base16-default-dark
 
 if has('autocmd')
   filetype plugin indent on
@@ -82,7 +87,7 @@ set completeopt=menuone,longest,preview
 "
 
 " CtrlP
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/node_modules/*,*/bower_components/*,*/typings/*
+set wildignore+=*/node_modules/*,*/bower_components/*,*/typings/*
 
 " Text wrap simpler, then type the open tag or ',"
 vmap <C-w> S
@@ -108,6 +113,8 @@ endif
 " Syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%{fugitive#statusline()}
+set statusline+=%-10.3n
 set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
@@ -117,6 +124,7 @@ let g:syntastic_check_on_wq = 0
 
 " Set javascript checker
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exec = ['eslint_d']
 
 "JS Highlighting
 let g:jsx_ext_required = 0
@@ -125,3 +133,18 @@ let g:jsx_ext_required = 0
 let g:jsdoc_allow_input_prompt = 1
 let g:jsdoc_input_description = 1
 let g:jsdoc_enable_es6 = 1
+
+"fugitive
+:set diffopt+=vertical
+
+"ctags
+set tags=./tags;/
+
+"multi cursors
+let g:multi_cursor_exit_from_visual_mode = 0
+let g:multi_cursor_exit_from_insert_mode = 0
+let g:multi_cursor_next_key = '<C-d>'
+
+"code folding
+let g:javascript_continuation = 1
+
