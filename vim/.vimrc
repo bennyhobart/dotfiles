@@ -1,96 +1,83 @@
 set nocompatible
 filetype off
 set rtp+=~/.vim/vundle/
+let mapleader = ","
 call vundle#rc()
+Plugin 'gmarik/vundle'
 
-Bundle 'gmarik/vundle'
-Bundle 'pangloss/vim-javascript'
-Bundle 'mxw/vim-jsx'
-Bundle 'SirVer/ultisnips'
-Bundle 'scrooloose/syntastic'
-Bundle 'kien/ctrlp.vim'
-Bundle 'vim-airline/vim-airline'
-Bundle 'vim-airline/vim-airline-themes'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'scrooloose/nerdtree'
-Bundle 'othree/html5.vim'
-Bundle 'hail2u/vim-css3-syntax'
-Bundle 'groenewege/vim-less'
-Bundle 'chriskempson/base16-vim'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-unimpaired'
-Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-commentary'
-Bundle 'tpope/vim-sleuth'
-Bundle 'heavenshell/vim-jsdoc'
-Bundle 'ternjs/tern_for_vim'
-Bundle 'statianzo/vim-jade'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'honza/vim-snippets'
-Bundle 'mustache/vim-mustache-handlebars'
-Bundle 'tpope/vim-fugitive'
-Bundle 'raimondi/delimitmate'
-Bundle 'terryma/vim-multiple-cursors'
-Bundle 'mtscout6/syntastic-local-eslint.vim'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-sleuth'
+Plugin 'tpope/vim-endwise'
+Plugin 'tpope/vim-fugitive'
+
+Plugin 'ervandew/supertab'
+
+Plugin 'airblade/vim-gitgutter'
+
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
+Plugin 'Valloric/YouCompleteMe', { 'do': './install.py' }
+Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plugin 'steelsojka/deoplete-flow'
+Plugin 'justinmk/vim-sneak'
+
+Plugin 'pangloss/vim-javascript'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'chriskempson/base16-vim'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'jparise/vim-graphql'
+Plugin 'heavenshell/vim-jsdoc'
+Plugin 'rking/ag.vim'
+Plugin 'sbdchd/neoformat'
+Plugin 'mxw/vim-jsx'
+Plugin 'leafgarland/typescript-vim'
+
+Plugin 'neomake/neomake'
+
+" Snippets.
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+
+Plugin 'easymotion/vim-easymotion'
+Plugin 'thinca/vim-localrc'
+
+" Autocomplete
+call deoplete#enable()
+let g:deoplete#sources#flow#flow_bin = 'flow'
+function! StrTrim(txt)
+  return substitute(a:txt, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
+endfunction
+
+" local flow
+let g:flow_path = StrTrim(system('PATH=$(npm bin):$PATH && which flow'))
+
+if g:flow_path != 'flow not found'
+  let g:deoplete#sources#flow#flow_bin = g:flow_path
+endif
 
 "Set colorscheme
-set background=dark
 colorscheme base16-default-dark
 
-if has('autocmd')
-  filetype plugin indent on
-endif
-if has('syntax') && !exists('g:syntax_on')
-  syntax enable
-endif
 
-" Use :help 'option' to see the documentation for the given option.
-set autoindent
-set backspace=indent,eol,start
-set complete-=i
-set showmatch
-set showmode
-set tabstop=4
-set expandtab
-set nrformats-=octal
-set shiftround
-set ttimeout
-set ttimeoutlen=50
-set incsearch
-set laststatus=2
-set ruler
-set showcmd
-set wildmenu
-set autoread
-set encoding=utf-8
-set listchars=tab:▒░,trail:▓
-set list
+set noswapfile
 set number
-set hlsearch
-set ignorecase
-set smartcase
 
-" In many terminal emulators the mouse works just fine, thus enable it.
-if has('mouse')
-  set mouse=a
-endif
-
-" do not history when leavy buffer
-set hidden
-
-set fileformats=unix,dos,mac
-
-set completeopt=menuone,longest,preview
-
-"
 " Plugins config
-"
+"ctrl p ignore
+set wildignore+=*/dist/*,*/node_modules/*,*/vendor/bundle/*,*/build/*,*/coverage/*     " MacOSX/Linux
 
-" CtrlP
-set wildignore+=*/node_modules/*,*/bower_components/*,*/typings/*
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{fugitive#statusline()}
+set statusline+=%-10.3n
+set statusline+=%*
 
-" Text wrap simpler, then type the open tag or ',"
-vmap <C-w> S
+"tabs
 nnoremap <C-b>  :tabprevious<CR>
 inoremap <C-b>  <Esc>:tabprevious<CR>i
 nnoremap <C-n>  :tabnext<CR>
@@ -100,31 +87,18 @@ inoremap <C-t>  <Esc>:tabnew<CR>i
 nnoremap <C-k>  :tabclose<CR>
 inoremap <C-k>  <Esc>:tabclose<CR>i
 
-let mapleader = ','
-nnoremap <Leader>p :set paste<CR>
-nnoremap <Leader>o :set nopaste<CR>
-noremap  <Leader>g :GitGutterToggle<CR>
+" deoplete completions
+let g:deoplete#enable_at_startup = 1
 
-" this machine config
-if filereadable(expand("~/.vimrc.local"))
-  source ~/.vimrc.local
-endif
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
 
-" Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%{fugitive#statusline()}
-set statusline+=%-10.3n
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-" Set javascript checker
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_javascript_eslint_exec = ['eslint_d']
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 "JS Highlighting
 let g:jsx_ext_required = 0
@@ -134,12 +108,6 @@ let g:jsdoc_allow_input_prompt = 1
 let g:jsdoc_input_description = 1
 let g:jsdoc_enable_es6 = 1
 
-"fugitive
-:set diffopt+=vertical
-
-"ctags
-set tags=./tags;/
-
 "multi cursors
 let g:multi_cursor_exit_from_visual_mode = 0
 let g:multi_cursor_exit_from_insert_mode = 0
@@ -147,4 +115,31 @@ let g:multi_cursor_next_key = '<C-d>'
 
 "code folding
 let g:javascript_continuation = 1
+let g:javascript_plugin_flow = 1
+"
+" trim trailing white space on save
+autocmd BufWritePre * %s/\s\+$//e
 
+" NerdTree
+let NERDTreeShowHidden=1
+
+" ctrlp
+let g:ctrlp_show_hidden = 1
+
+" formatting
+nnoremap gp :Neoformat prettiereslint<cr>
+
+" filenames for closetags
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.js"
+
+let g:sneak#label = 1
+
+" neomake
+let g:neomake_javascript_eslint_exe = $PWD .'/node_modules/.bin/eslint'
+let g:neomake_javascript_flow_exe = $PWD .'/node_modules/.bin/flow'
+let g:neomake_jsx_eslint_exe = $PWD .'/node_modules/.bin/eslint'
+let g:neomake_jsx_flow_exe = $PWD .'/node_modules/.bin/flow'
+
+let g:neomake_javascript_enabled_makers = ['eslint', 'flow']
+let g:neomake_jsx_enabled_makers = ['eslint', 'flow']
+autocmd BufWritePost * Neomake
