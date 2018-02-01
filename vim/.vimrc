@@ -23,16 +23,12 @@ Plug 'tpope/vim-fugitive'
 "Project Exploration
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'scrooloose/nerdtree'
 Plug 'mileszs/ack.vim'
+Plug 'scrooloose/nerdtree'
 
 " Formatting and Filechecking
-Plug 'sbdchd/neoformat'
-Plug 'neomake/neomake'
-
-" Autocompletion
-Plug 'Shougo/deoplete.nvim'
-Plug 'steelsojka/deoplete-flow'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'w0rp/ale'
 
 " Syntax highlighting
 Plug 'jparise/vim-graphql'
@@ -41,13 +37,23 @@ Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 
 " Colors
-Plug 'junegunn/seoul256.vim'
+Plug 'chriskempson/base16-vim'
 Plug 'airblade/vim-gitgutter'
+Plug 'vim-airline/vim-airline'
+Plug 'altercation/vim-colors-solarized'
+Plug 'joshdick/onedark.vim'
 call plug#end()
 
 "Set colorscheme
-colo seoul256
+if (has("nvim"))
+  "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+endif
+if (has("termguicolors"))
+  set termguicolors
+endif
 set background=dark
+colorscheme onedark
 
 set noswapfile
 set number
@@ -68,21 +74,10 @@ inoremap <C-t>  <Esc>:tabnew<CR>i
 nnoremap <C-k>  :tabclose<CR>
 inoremap <C-k>  <Esc>:tabclose<CR>i
 
-" Autocomplete
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_ignore_case = 1
-let g:deoplete#enable_at_startup = 1
-
-"" Local Flow
-function! StrTrim(txt)
-  return substitute(a:txt, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
-endfunction
-
-let g:flow_path = StrTrim(system('PATH=$(npm bin):$PATH && which flow'))
-
-if g:flow_path != 'flow not found'
-  let g:deoplete#sources#flow#flow_bin = g:flow_path
-endif
+" Statusline
+let g:airline#extensions#tabline#enabled = 0
+let g:airline#extensions#ale#enabled = 1
+let g:airline_theme='onedark'
 
 "JS
 let g:jsx_ext_required = 0
@@ -90,23 +85,18 @@ let g:javascript_plugin_flow = 1
 let g:javascript_continuation = 1
 
 " Search shortcuts
-nnoremap <C-s>  :Files<CR>
-inoremap <C-s>  <Esc>:Files<CR>i
+nnoremap <C-p>  :Files<CR>
+inoremap <C-p>  <Esc>:Files<CR>i
 nnoremap gf :Ack!<space>
 
-" Formatting shortcuts
-nnoremap gp :Neoformat<cr>
+" History + Git
+nnoremap gb :BCommits<CR>
+nnoremap gh :History<CR>
+nnoremap gs :GFiles?<CR>
 
-" Neomake
-nnoremap gm :Neomake<cr>
-let g:neomake_javascript_eslint_exe = $PWD .'/node_modules/.bin/eslint'
-let g:neomake_javascript_flow_exe = $PWD .'/node_modules/.bin/flow'
-let g:neomake_jsx_eslint_exe = $PWD .'/node_modules/.bin/eslint'
-let g:neomake_jsx_flow_exe = $PWD .'/node_modules/.bin/flow'
-let g:neomake_javascript_enabled_makers = ['eslint', 'flow']
-let g:neomake_jsx_enabled_makers = ['eslint', 'flow']
+" Formatting shortcuts
+nnoremap gp :PrettierAsync<CR>
 
 " Autocmds
-autocmd BufWritePre * %s/\s\+$//e " trim trailing white space
-autocmd! BufWritePost * Neomake  " run neomake
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
 autocmd QuickFixCmdPost *grep* cwindow
