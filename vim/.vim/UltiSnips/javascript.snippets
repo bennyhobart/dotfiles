@@ -1,0 +1,19 @@
+snippet rcpc "create pure component" b
+// @flow
+import React, { PureComponent } from 'react';
+import { View } from 'react-native';
+
+type Props = {
+};
+
+export default class ${1:ClassName} extends PureComponent<Props> {
+  render() {
+    return <View />;
+  }
+}
+endsnippet
+
+snippet im "import module" b
+import $1 from "$2";
+endsnippet
+

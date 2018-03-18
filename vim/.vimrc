@@ -15,7 +15,6 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-sleuth'
 Plug 'easymotion/vim-easymotion'
 Plug 'justinmk/vim-sneak'
-Plug 'ervandew/supertab'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -35,6 +34,10 @@ Plug 'jparise/vim-graphql'
 Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
+
+" Autocomplete
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+Plug 'SirVer/ultisnips'
 
 " Colors
 Plug 'chriskempson/base16-vim'
@@ -74,6 +77,11 @@ inoremap <C-t>  <Esc>:tabnew<CR>i
 nnoremap <C-k>  :tabclose<CR>
 inoremap <C-k>  <Esc>:tabclose<CR>i
 
+" Ultisnips
+let g:UltiSnipsSnippetsDir="~/.config/nvim/UltiSnips"
+let g:UltiSnipsExpandTrigger="<C-s>"
+
+
 " Statusline
 let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#ale#enabled = 1
@@ -87,7 +95,7 @@ let g:javascript_continuation = 1
 " Search shortcuts
 nnoremap <C-p>  :Files<CR>
 inoremap <C-p>  <Esc>:Files<CR>i
-nnoremap gf :Ack!<space>
+nnoremap <Leader>f :Ack!<space>
 
 " History + Git
 nnoremap gb :BCommits<CR>
