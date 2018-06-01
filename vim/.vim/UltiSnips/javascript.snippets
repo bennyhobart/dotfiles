@@ -17,3 +17,32 @@ snippet im "import module" b
 import $1 from "$2";
 endsnippet
 
+snippet tc "test component" b
+// @flow
+import React from 'react';
+import ShallowRenderer from 'react-test-renderer/shallow';
+import TestRenderer from 'react-test-renderer';
+import Component, { type Props } from '../Component';
+
+describe('Component', () => {
+  let props: Props;
+  beforeEach(() => {
+    // $FlowExpectedError
+    props = {};
+  });
+
+  it('renders', () => {
+    const renderer = new ShallowRenderer();
+    renderer.render(<Component {...props} />);
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('renders icon', () => {
+    const testInstance = TestRenderer.create(<Component {...props} />);
+    const node = testInstance.root.findByProps({
+      name: props.icon,
+    });
+    expect(node).toBeTruthy();
+  });
+});
+endsnippet
