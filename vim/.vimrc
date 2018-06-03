@@ -1,4 +1,6 @@
-" Install Vim Plug if not installed
+let g:python_host_prog = '/Users/bennyhobart/.pyenv/versions/2.7.11/envs/neovim2/bin/python'
+let g:python3_host_prog = '/Users/bennyhobart/.pyenv/versions/3.4.4/envs/neovim3/bin/python'
+
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -161,12 +163,10 @@ nnoremap gb :BCommits<CR>
 nnoremap gh :History<CR>
 nnoremap gs :GFiles?<CR>
 
-" Formatting shortcuts
-nnoremap gp :PrettierAsync<CR>
-
-" Autocmds
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
-autocmd QuickFixCmdPost *grep* cwindow
+" Fix
+let g:ale_fix_on_save = 1
+let g:ale_fixers = {}
+let g:ale_fixers['javascript'] = ['prettier']
 
 "fzf
 let g:fzf_buffers_jump = 1
