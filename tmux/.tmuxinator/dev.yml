@@ -1,0 +1,14 @@
+# ~/.tmuxinator/development.yml
+
+name: dev
+root: ~
+
+windows:
+  - processes: vtop
+  - console: 
+      panes:
+        -
+        -
+        -
+        -
+  - editor: nvim

@@ -49,21 +49,11 @@ Plug 'Shougo/neco-syntax'
 
 " Colors
 Plug 'airblade/vim-gitgutter'
-Plug 'chriskempson/base16-vim'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'arcticicestudio/nord-vim'
 call plug#end()
 
-if (has("nvim"))
-  "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-endif
-if (has("termguicolors"))
-  set termguicolors
-endif
-
 "Set colorscheme
-colorscheme base16-default-dark
+colorscheme nord
 
 " Enhance command-line completion
 set wildmenu
@@ -147,7 +137,6 @@ let g:UltiSnipsExpandTrigger="<C-s>"
 " Statusline
 let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#ale#enabled = 1
-let g:airline_theme='base16'
 
 "JS
 let g:jsx_ext_required = 0
@@ -170,4 +159,6 @@ let g:ale_fixers['javascript'] = ['prettier']
 
 "fzf
 let g:fzf_buffers_jump = 1
-let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+
+" NERDTree
+let NERDTreeShowHidden=1
