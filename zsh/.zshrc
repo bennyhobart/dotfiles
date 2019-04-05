@@ -20,11 +20,6 @@ export NVM_DIR="$HOME/.nvm"
 # FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# pyenv
-export PATH="/Users/bennyhobart/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
 # editor
 export EDITOR="nvim"
 
@@ -50,6 +45,7 @@ _tmuxinator() {
 
 compdef _tmuxinator tmuxinator mux
 alias mux="tmuxinator"
+alias vim="nvim"
 
 # Local Variables:
 # mode: Shell-Script
@@ -58,3 +54,4 @@ alias mux="tmuxinator"
 # sh-basic-offset: 2
 # End:
 # vim: ft=zsh sw=2 ts=2 et
+export PATH="/usr/local/sbin:$PATH"

@@ -1,6 +1,3 @@
-let g:python_host_prog = '/Users/bennyhobart/.pyenv/versions/2.7.11/envs/neovim2/bin/python'
-let g:python3_host_prog = '/Users/bennyhobart/.pyenv/versions/3.4.4/envs/neovim3/bin/python'
-
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -36,12 +33,10 @@ Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'pangloss/vim-javascript'
 Plug 'jparise/vim-graphql'
 Plug 'mxw/vim-jsx'
-Plug 'styled-components/vim-styled-components'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'leafgarland/typescript-vim'
 
 " Autocomplete
-Plug 'SirVer/ultisnips'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 Plug 'wokalski/autocomplete-flow'
@@ -63,9 +58,6 @@ set backspace=indent,eol,start
 set ttyfast
 " Change mapleader
 let mapleader=","
-" Centralize backups, swapfiles and undo history
-set backupdir=~/.vim/backups
-set directory=~/.vim/swaps
 " Respect modeline in files
 set modeline
 set modelines=4
@@ -154,8 +146,8 @@ nnoremap gs :GFiles?<CR>
 
 " Fix
 let g:ale_fix_on_save = 1
-let g:ale_fixers = {}
-let g:ale_fixers['javascript'] = ['prettier']
+let g:ale_fixers = {'javascript': ['prettier', 'eslint']}
+
 
 "fzf
 let g:fzf_buffers_jump = 1
